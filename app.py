@@ -26,7 +26,7 @@ if uploaded_file is not None:
             break
         elif polling_response.json()['status'] == 'error':
             raise Exception("Transcription failed. Make sure a valid API key has been used.")
-    st.audio(read_file(uploaded_file), format='audio/mp3')
+    st.audio(uploaded_file.read(5242880), format='audio/mp3')
     with open('readme.txt', 'w') as file:
         for speaker in polling_response.json()['utterances']:
             note=f'Speaker {speaker.get("speaker")} : {speaker.get("text")}'
