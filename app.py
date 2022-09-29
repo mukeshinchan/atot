@@ -4,6 +4,7 @@ import streamlit as st
 uploaded_file = st.file_uploader("Select file from your directory")
 p=uploaded_file
 audio_bytes = p.read()
+st.audio(audio_bytes, format='audio/mp3')
 if uploaded_file is not None:
     st.audio(audio_bytes, format='audio/mp3')
     UPLOAD_ENDPOINT = "https://api.assemblyai.com/v2/upload"
