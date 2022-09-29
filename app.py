@@ -34,6 +34,6 @@ with open('readme.txt', 'w') as file:
         file.write('\n')
 with open('readme.txt','r')as file:
     st.download_button('Download',file, 'readme')
-if uploaded_file is not None:
+if p is not None:
     audio_bytes = p.read()
     st.audio(audio_bytes, format='audio/mp3')
