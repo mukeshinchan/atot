@@ -6,7 +6,6 @@ p=uploaded_file
 audio_bytes = p.read()
 st.audio(audio_bytes, format='audio/mp3')
 if uploaded_file is not None:
-    st.audio(audio_bytes, format='audio/mp3')
     UPLOAD_ENDPOINT = "https://api.assemblyai.com/v2/upload"
     TRANSCRIPTION_ENDPOINT = "https://api.assemblyai.com/v2/transcript"
     api_key = "24cb91bdd2264679bf0f35e89430dab9"
