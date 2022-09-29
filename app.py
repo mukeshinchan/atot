@@ -2,7 +2,10 @@ import requests
 import streamlit as st
 
 uploaded_file = st.file_uploader("Select file from your directory")
+p=uploaded_file
 if uploaded_file is not None:
+    audio_bytes = p.read()
+    st.audio(audio_bytes, format='audio/mp3')
     UPLOAD_ENDPOINT = "https://api.assemblyai.com/v2/upload"
     TRANSCRIPTION_ENDPOINT = "https://api.assemblyai.com/v2/transcript"
     api_key = "24cb91bdd2264679bf0f35e89430dab9"
@@ -26,7 +29,6 @@ if uploaded_file is not None:
             break
         elif polling_response.json()['status'] == 'error':
             raise Exception("Transcription failed. Make sure a valid API key has been used.")
-    st.audio(uploaded_file.read(5242880), format='audio/mp3')
     with open('readme.txt', 'w') as file:
         for speaker in polling_response.json()['utterances']:
             note=f'Speaker {speaker.get("speaker")} : {speaker.get("text")}'
