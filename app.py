@@ -2,7 +2,7 @@ import requests
 import streamlit as st
 
 uploaded_file = st.file_uploader("Select file from your directory")
-
+p=uploaded_file
 UPLOAD_ENDPOINT = "https://api.assemblyai.com/v2/upload"
 TRANSCRIPTION_ENDPOINT = "https://api.assemblyai.com/v2/transcript"
 api_key = "24cb91bdd2264679bf0f35e89430dab9"
@@ -35,5 +35,5 @@ with open('readme.txt', 'w') as file:
 with open('readme.txt','r')as file:
     st.download_button('Download',file, 'readme')
 if uploaded_file is not None:
-    audio_bytes = uploaded_file.read()
+    audio_bytes = p.read()
     st.audio(audio_bytes, format='audio/mp3')
