@@ -18,9 +18,11 @@ if uploaded_file is not None:
     transcript_request = {'audio_url': audio_url,"speaker_labels": True}
     transcript_response = requests.post(TRANSCRIPTION_ENDPOINT, json=transcript_request, headers=headers)
     _id = transcript_response.json()["id"]
+    n=0
     while True:
         polling_response = requests.get(TRANSCRIPTION_ENDPOINT + "/" + _id, headers=headers)
-
+        n=n+1
+        st.wirte(n)
         if polling_response.json()['status'] == 'completed':
             st.header('Audio To Text Converter')
             break
