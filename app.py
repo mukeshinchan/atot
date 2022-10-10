@@ -27,8 +27,8 @@ if uploaded_file is not None:
         elif polling_response.json()['status'] == 'error':
             raise Exception("Transcription failed. Make sure a valid API key has been used.")
 str=''
-    for speaker in polling_response.json()['utterances']:
-        note=f'Speaker {speaker.get("speaker")} : {speaker.get("text")}'
-        st.write(note)
-        str=str+note
+        for speaker in polling_response.json()['utterances']:
+            note=f'Speaker {speaker.get("speaker")} : {speaker.get("text")}'
+            st.write(note)
+            str=str+note
 st.write(str)
