@@ -23,9 +23,6 @@ if uploaded_file is not None:
         polling_response = requests.get(TRANSCRIPTION_ENDPOINT + "/" + _id, headers=headers)
         n=n+1
         st.write(n)
-        for speaker in polling_response.json()['utterances']:
-            note=f'Speaker {speaker.get("speaker")} : {speaker.get("text")}'
-        st.write(note)
         if polling_response.json()['status'] == 'completed':
             st.header('Audio To Text Converter')
             break
