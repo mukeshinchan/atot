@@ -22,7 +22,7 @@ if uploaded_file is not None:
     while True:
         polling_response = requests.get(TRANSCRIPTION_ENDPOINT + "/" + _id, headers=headers)
         n=n+1
-        st.wirte(n)
+        st.write(n)
         if polling_response.json()['status'] == 'completed':
             st.header('Audio To Text Converter')
             break
