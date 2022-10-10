@@ -31,4 +31,12 @@ if uploaded_file is not None:
             break
         elif polling_response.json()['status'] == 'error':
             raise Exception("Transcription failed. Make sure a valid API key has been used.")
-  
+     
+    with open('readme.txt', 'w') as file:
+        for speaker in polling_response.json()['utterances']:
+            note=f'Speaker {speaker.get("speaker")} : {speaker.get("text")}'
+            st.write(note)
+            file.write(note)
+            file.write('\n')
+    with open('readme.txt','r')as file:
+        st.download_button('Download',file, 'readme')
