@@ -18,19 +18,14 @@ if uploaded_file is not None:
     transcript_request = {'audio_url': audio_url,"speaker_labels": True}
     transcript_response = requests.post(TRANSCRIPTION_ENDPOINT, json=transcript_request, headers=headers)
     _id = transcript_response.json()["id"]
-    n=0
     while True:
         polling_response = requests.get(TRANSCRIPTION_ENDPOINT + "/" + _id, headers=headers)
+
         if polling_response.json()['status'] == 'completed':
             st.header('Audio To Text Converter')
             break
         elif polling_response.json()['status'] == 'error':
-            raise Exception("Transcription failed. Make sure a valid API key has been used.") 
-str=''
-for speaker in polling_response.json()['utterances']:
-    note=f'Speaker {speaker.get("speaker")} : {speaker.get("text")}'
-    str=str+note
-    st.write(note)
-with open('readme.txt','r+')as file:
-    file.write(str)
-    st.download_button('Download',file, 'readme')
+            raise Exception("Transcription failed. Make sure a valid API key has been used.")
+        for speaker in polling_response.json()['utterances']:
+            note=f'Speaker {speaker.get("speaker")} : {speaker.get("text")}'
+            st.write(note)
