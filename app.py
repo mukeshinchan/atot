@@ -33,7 +33,5 @@ if uploaded_file is not None:
     for speaker in polling_response.json()['utterances']:
         note=f'Speaker {speaker.get("speaker")} : {speaker.get("text")}'
         st.write(note)
-        file.write(note)
-        file.write('\n')
     with open('readme.txt','r')as file:
         st.download_button('Download',file, 'readme')
