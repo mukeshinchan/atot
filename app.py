@@ -25,11 +25,12 @@ if uploaded_file is not None:
             st.header('Audio To Text Converter')
             break
         elif polling_response.json()['status'] == 'error':
-            raise Exception("Transcription failed. Make sure a valid API key has been used.")
-     
-   
+            raise Exception("Transcription failed. Make sure a valid API key has been used.") 
+str=''
     for speaker in polling_response.json()['utterances']:
         note=f'Speaker {speaker.get("speaker")} : {speaker.get("text")}'
+        str=str+note
         st.write(note)
-    with open('readme.txt','r')as file:
+    with open('readme.txt','r+')as file:
+        file.write(str)
         st.download_button('Download',file, 'readme')
